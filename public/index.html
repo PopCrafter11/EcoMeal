@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Application Anti-Gaspillage</title>
+    <title>WebSocket App</title>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <h1>Bienvenue dans mon application anti-gaspillage alimentaire</h1>
-	<h1>Démo WebSocket</h1>
-    <input id="message" type="text" placeholder="Tapez un message">
+    <h1>Application en temps réel</h1>
+    <input id="message" type="text" placeholder="Votre message">
     <button onclick="sendMessage()">Envoyer</button>
     <ul id="messages"></ul>
 
     <script>
         const socket = io();
 
-        // Envoyer un message
         function sendMessage() {
             const message = document.getElementById('message').value;
             socket.emit('message', message);
         }
 
-        // Recevoir les messages
         socket.on('message', (data) => {
             const messagesList = document.getElementById('messages');
-            const listItem = document.createElement('<li');
+            const listItem = document.createElement('li');
             listItem.textContent = data;
             messagesList.appendChild(listItem);
         });
